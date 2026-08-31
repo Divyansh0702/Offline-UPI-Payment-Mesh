@@ -94,7 +94,7 @@ public class ApiController {
         List<MeshSimulatorService.BridgeUpload> uploads = mesh.collectBridgeUploads();
 
         List<Map<String, Object>> results = new ArrayList<>();
-        // Upload them in parallel to actually exercise concurrent idempotency.
+        // Uploading in parallel to actually exercise concurrent idempotency.
         uploads.parallelStream().forEach(up -> {
             BridgeIngestionService.IngestResult r =
                     bridge.ingest(up.packet(), up.bridgeNodeId(), 5 - up.packet().getTtl());
